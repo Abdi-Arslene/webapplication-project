@@ -1,0 +1,42 @@
+* {
+    	text-align: center;
+  	font-family: "Arial", "arial", "cursive";
+
+}
+
+.controlbar{
+    	display: inline-block;
+    	margin-right: 1rem;
+}
+
+.control{
+	padding: 10px;
+	color: #FFFFFF;
+	border: solid black 2px;
+  	background-color: #2A3F51;
+}
+
+#canvas{
+    	border: 2px solid black;
+
+}
+#div1{
+	color: #FFFFFF;
+	padding: 10px;
+	border: solid black 5px;
+	background-image: url("https://cdnb.artstation.com/p/assets/images/images/011/998/259/large/to-anne-laure-ll13.jpg?1532505605");
+
+}
+#div2{
+	color: #FFFFFF;
+	padding: 10px;
+	border: solid black 5px;
+  	background-color: #2A3F51;
+
+}
+
+.button{	  
+	border: solid black 5px;
+	  
+}
+
