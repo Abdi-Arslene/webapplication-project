@@ -8,8 +8,8 @@ function screenshot(){
     const canvas = document.getElementById('canvas')
     var dataURL = canvas.toDataURL();
     console.log(dataURL);
-    document.getElementById("image").innerHTML="<p>Image correspondante :</p><img src='"+dataURL+"'>";
-
+    windows = window.open('about:blank');
+    windows.document.write('<img src="'+dataURL+'"/>')
 }
 
 // initiating 2D context on it
