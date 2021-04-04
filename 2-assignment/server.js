@@ -45,43 +45,43 @@ app.get('/imagesaved', jsonparser, async (req, res) => {
   let alldata = [];
   for (let i=0; i<lines.length; i++) {
     data = {
+      id: lines[i]._id,
       img_url: lines[i].img_url,
       name: lines[i].name,
-      date: lines[i].date,
-      id: lines[i]._id
+      date: lines[i].date
+      
     }
     
     alldata.push(data)
   }
-  res.send(
-    alldata.map((data, i )=>
-      `<div class='cont'>
-        <div class='cont'>
-          <p> owner: ${data.name} </p>
-          <p> date of realisation: ${data.date}</p>
-          <button onclick="display${i}()">display the image</button>
-        </div>
-        <img id='${data.id}' src='${data.img_url}'/><br>
-      </div>
-      <script>
-        function display${i}(){
-          windows = window.open("about:blank")
-          const draw = document.getElementById('${data.id}').src
-          windows.document.write('<img src="'+draw+'"/>')
-        }
-      </script>
-      <style>
-        .cont{
-          margin: 0 auto;
-          border: solid black 4px;
-        }
-        *{
-        text-align: center;
-        font-family: "Arial", "arial", "cursive";
-        }
-      </style>
-    `).join('')
-  )
+  let images= alldata.map(function(data, i ){
+  return(`<div class='cont'>
+    <div class='cont'>
+      <h2> owner:</h2> <p> ${data.name} </p>
+      <h2> date of realisation:</h2> <p> ${data.date}</p>
+      <button onclick="display${i}()">display the image</button>
+    </div>
+    <img id='${data.id}' src='${data.img_url}'/><br>
+  </div>
+  <script>
+    function display${i}(){
+      windows = window.open("about:blank")
+      const draw = document.getElementById('${data.id}').src
+      windows.document.write('<img src="'+draw+'"/>')
+    }
+  </script>
+  <style>
+    .cont{
+      margin: 0 auto;
+      border: solid black 4px;
+    }
+    *{
+    text-align: center;
+    font-family: "Arial", "arial", "cursive";
+    }
+  </style>
+`)}).join(' ')
+  res.send(images) 
 })
 
 //I listen for socket connection
