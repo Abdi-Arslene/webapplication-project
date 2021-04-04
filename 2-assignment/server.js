@@ -11,16 +11,6 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 const imageDataURI= require('image-data-uri')
 
-
-
-
-
-
-
-
-
-
-
 const MongoClient = require('mongodb').MongoClient;
 
 const uri = "mongodb+srv://abdi:abdi@cluster0.7q4c9.mongodb.net/db_project?retryWrites=true&w=majority";
@@ -29,10 +19,6 @@ client.connect(err => {
   collection = client.db("db_project").collection("images");
   // perform actions on the collection object
 });
-
-
-
-
 
 app.use(express.static('public'))
 
@@ -57,29 +43,29 @@ app.get('/imagesaved', jsonparser, async (req, res) => {
 
   const lines = await collection.find({}).toArray()
   let alldata = [];
-  for (const line of lines) {
+  for (let i=0; i<lines.length; i++) {
     data = {
-      img_url: line.img_url,
-      name: line.name,
-      date: line.date,
-      id: line._id
+      img_url: lines[i].img_url,
+      name: lines[i].name,
+      date: lines[i].date,
+      id: lines[i]._id
     }
     
     alldata.push(data)
   }
   res.send(
-    alldata.map((data, index )=>
+    alldata.map((data, i )=>
       `<div class='cont'>
         <div class='cont'>
           <p> owner: ${data.name} </p>
           <p> date of realisation: ${data.date}</p>
-          <button onclick="display()">display the image</button>
+          <button onclick="display${i}()">display the image</button>
         </div>
         <img id='${data.id}' src='${data.img_url}'/><br>
       </div>
       <script>
-        function display(){
-          windows = window.open()
+        function display${i}(){
+          windows = window.open("about:blank")
           const draw = document.getElementById('${data.id}').src
           windows.document.write('<img src="'+draw+'"/>')
         }

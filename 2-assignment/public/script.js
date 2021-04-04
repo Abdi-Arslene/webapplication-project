@@ -25,12 +25,12 @@ const send_data = async function() {
 }
 function save () {
     send_data();
-    let resp = document.getElementById('response')
-    resp.innerHTML = `Uploaded successfully!`
+    alert('Uploaded successfully!');
 
 }
 function saved () { 
-    window.open('http://localhost:5000/imagesaved');
+    console.log(window.location.href);
+    window.open(window.location.href+'imagesaved');
 }
 
 // initiating 2D context on it
